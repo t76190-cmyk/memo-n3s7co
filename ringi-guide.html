@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>稟議書ツールの使い方｜ネスコインベストメント社内ポータル</title>
+<style>
+  :root{
+    --navy:#17375e;
+    --navy-dark:#0c1f3a;
+    --navy-deep:#081831;
+    --orange:#f39800;
+    --amber:#f9b233;
+    --sun-core:#ffeec2;
+    --ink:#23272c;
+    --muted:#5f6871;
+    --line:#e3ded4;
+    --bg:#f7f4ef;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans CJK JP","Yu Gothic",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.7;
+    -webkit-text-size-adjust:100%;
+  }
+
+  /* ===== ヒーロー ===== */
+  header{
+    position:relative;
+    overflow:hidden;
+    color:#fff;
+    background:
+      radial-gradient(ellipse 640px 340px at 88% -60px, rgba(249,178,51,.34), rgba(249,178,51,0) 70%),
+      radial-gradient(ellipse 900px 520px at 108% -140px, rgba(243,152,0,.20), rgba(243,152,0,0) 70%),
+      radial-gradient(ellipse 700px 480px at -10% 120%, rgba(64,110,168,.35), rgba(64,110,168,0) 70%),
+      linear-gradient(140deg,#1b4069 0%,var(--navy) 42%,var(--navy-dark) 78%,var(--navy-deep) 100%);
+    padding:64px 24px 58px;
+  }
+  /* 太陽のモチーフ（封筒の太陽マークへのオマージュ） */
+  .sun{
+    position:absolute;
+    top:-58px;right:-38px;
+    width:264px;height:264px;
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 50%, var(--sun-core) 0%, #ffd98a 34%, var(--amber) 62%, var(--orange) 82%, rgba(243,152,0,0) 100%);
+    opacity:.92;
+    pointer-events:none;
+  }
+  .sun::before{
+    content:"";
+    position:absolute;inset:-34px;
+    border-radius:50%;
+    border:1.5px solid rgba(255,217,138,.45);
+  }
+  .sun::after{
+    content:"";
+    position:absolute;inset:-72px;
+    border-radius:50%;
+    border:1px solid rgba(255,217,138,.22);
+  }
+  .header-inner{position:relative;max-width:1000px;margin:0 auto;z-index:1;}
+  .logo-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+  .logo-row img{
+    height:56px;width:auto;background:#fff;border-radius:12px;padding:7px 12px;
+    box-shadow:0 8px 24px rgba(4,16,34,.35);
+  }
+  .eyebrow{
+    font-size:11.5px;letter-spacing:.34em;color:#ffd98a;font-weight:bold;
+    text-transform:uppercase;margin:0 0 10px;
+  }
+  .header-title h1{
+    margin:0;line-height:1.3;font-weight:700;
+  }
+  .header-title .h1-main{
+    display:block;
+    font-size:42px;letter-spacing:.10em;line-height:1.25;
+    text-shadow:0 2px 18px rgba(4,16,34,.35);
+  }
+  .header-title .h1-sub{
+    display:inline-block;
+    margin-top:10px;
+    font-size:15px;letter-spacing:.52em;font-weight:600;color:#ffe1ae;
+  }
+  .header-title .h1-rule{
+    display:block;width:64px;height:3px;border-radius:2px;
+    background:linear-gradient(90deg,var(--orange),#ffd98a);
+    margin:20px 0 16px;
+  }
+  .header-title p{
+    margin:0;font-size:13.5px;line-height:1.8;color:#ccd9e8;max-width:620px;
+  }
+  .internal-badge{
+    display:inline-block;margin-top:22px;
+    background:linear-gradient(120deg,var(--orange),var(--amber));
+    color:#fff;
+    font-size:12px;font-weight:bold;
+    padding:4px 16px;border-radius:999px;letter-spacing:.14em;
+    box-shadow:0 4px 12px rgba(243,152,0,.28);
+  }
+
+  /* ===== 本体 ===== */
+  main{max-width:1000px;margin:0 auto;padding:14px 20px 56px;}
+  section{margin-top:46px;}
+  section > h2{
+    display:flex;align-items:center;gap:12px;
+    font-size:21px;color:var(--navy);letter-spacing:.03em;
+    margin:0 0 8px;line-height:1.4;
+  }
+  section > h2::before{
+    content:"";
+    flex:none;width:15px;height:15px;border-radius:50%;
+    background:radial-gradient(circle at 50% 42%, var(--sun-core) 0%, var(--amber) 55%, var(--orange) 100%);
+    box-shadow:0 0 0 4px rgba(243,152,0,.16), 0 0 14px rgba(243,152,0,.45);
+  }
+  section > h2::after{
+    content:"";flex:1;height:1px;
+    background:linear-gradient(90deg, rgba(23,55,94,.28), rgba(23,55,94,0));
+  }
+  .section-note{
+    font-size:13.5px;color:var(--muted);margin:0 0 16px;
+  }
+  .about-box{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:24px 22px 12px;
+    box-shadow:0 1px 3px rgba(23,55,94,.05), 0 10px 26px rgba(23,55,94,.05);
+    overflow:hidden;
+  }
+  .about-box::before{
+    content:"";
+    position:absolute;top:0;left:0;right:0;height:4px;
+    background:linear-gradient(90deg,var(--orange) 0%,var(--amber) 45%,rgba(249,178,51,0) 95%);
+  }
+  .about-box p{margin:0 0 12px;font-size:14.5px;}
+  .about-box h3{
+    margin:18px 0 6px;font-size:15px;color:var(--navy);
+  }
+  .about-box h3:first-child{margin-top:2px;}
+  .dbox ul{margin:4px 0 12px;padding-left:18px;}
+  .dbox li{font-size:14px;line-height:1.75;}
+  .kv{border-collapse:collapse;width:100%;font-size:13.5px;margin:2px 0 12px;}
+  .kv th{text-align:left;color:var(--navy);font-weight:700;padding:6px 10px 6px 0;white-space:nowrap;vertical-align:top;border-bottom:1px solid var(--line);}
+  .kv td{padding:6px 0;line-height:1.6;border-bottom:1px solid var(--line);}
+  .kv tr:last-child th,.kv tr:last-child td{border-bottom:none;}
+
+  /* ===== 操作の流れ ===== */
+  .steps{list-style:none;counter-reset:step;margin:2px 0 12px;padding:0;}
+  .steps li{
+    counter-increment:step;
+    position:relative;
+    padding:10px 0 10px 52px;
+    border-top:1px dashed var(--line);
+    font-size:14px;line-height:1.75;
+  }
+  .steps li:first-child{border-top:none;}
+  .steps li::before{
+    content:counter(step);
+    position:absolute;left:2px;top:10px;
+    width:34px;height:34px;border-radius:50%;
+    background:linear-gradient(140deg,var(--navy),#2c5484);
+    color:#fff;font-weight:bold;font-size:15px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 3px 8px rgba(23,55,94,.25);
+  }
+  .steps li b{color:var(--navy);}
+  .steps .sub-note{display:block;font-size:13px;color:var(--muted);margin-top:2px;}
+
+  /* ===== ツールを開くボタン ===== */
+  .cta-wrap{margin-top:48px;text-align:center;}
+  .cta-btn{
+    display:inline-block;
+    background:linear-gradient(120deg,var(--orange),var(--amber));
+    color:#fff;font-weight:bold;font-size:17px;letter-spacing:.05em;
+    text-decoration:none;
+    border-radius:999px;padding:16px 44px;
+    box-shadow:0 6px 18px rgba(243,152,0,.35), 0 2px 5px rgba(23,55,94,.18);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .cta-btn:hover,.cta-btn:active{transform:translateY(-2px);box-shadow:0 10px 24px rgba(243,152,0,.42), 0 3px 7px rgba(23,55,94,.2);}
+  .cta-wrap .cta-btn{margin:6px 4px;}
+  .cta-note{font-size:12.5px;color:var(--muted);margin-top:12px;}
+
+  .back-wrap{margin-top:40px;text-align:center;}
+  .back-link{
+    display:inline-block;
+    color:var(--navy);font-weight:bold;font-size:14px;
+    text-decoration:none;
+    border:1px solid var(--line);background:var(--card);
+    border-radius:999px;padding:9px 26px;
+    box-shadow:0 1px 3px rgba(23,55,94,.05), 0 10px 26px rgba(23,55,94,.05);
+  }
+  .back-link:hover,.back-link:active{border-color:#d8cfbc;}
+
+  /* ===== フッター ===== */
+  footer{
+    background:linear-gradient(160deg,var(--navy-dark),var(--navy-deep));
+    padding:30px 16px 34px;
+    font-size:12.5px;color:#a9bccd;
+    text-align:center;
+  }
+  footer .f-inner{max-width:1000px;margin:0 auto;}
+  footer .null-walk{
+    display:block;height:56px;width:auto;margin:0 auto 14px;
+    filter:drop-shadow(0 6px 12px rgba(0,0,0,.35));
+  }
+  footer .f-back{
+    display:inline-block;margin-bottom:14px;font-size:13px;
+    color:#ffd98a;text-decoration:none;font-weight:bold;
+  }
+
+  @media (max-width:560px){
+    header{padding:44px 18px 40px;}
+    .sun{width:176px;height:176px;top:-44px;right:-52px;}
+    .header-title .h1-main{font-size:27px;letter-spacing:.05em;}
+    .header-title .h1-sub{font-size:13px;letter-spacing:.40em;}
+    .logo-row img{height:46px;}
+    section{margin-top:38px;}
+    section > h2{font-size:18px;}
+    main{padding:10px 14px 44px;}
+    .kv th{white-space:normal;}
+    .cta-btn{font-size:16px;padding:15px 32px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="sun" aria-hidden="true"></div>
+  <div class="header-inner">
+    <div class="logo-row">
+      <img src="assets/logo-main.png" alt="HIKARI match ロゴ">
+    </div>
+    <div class="header-title" style="margin-top:26px;">
+      <p class="eyebrow">NESCO INVESTMENTS</p>
+      <h1><span class="h1-main">稟議書ツールの使い方</span> <span class="h1-sub">RINGI TOOL GUIDE</span></h1>
+      <span class="h1-rule" aria-hidden="true"></span>
+      <p>稟議書を作成し、確認・決裁の記録を残すためのWebツールの使い方を説明します。はじめて使う方は、このページを読んでからツールを開いてください。</p>
+    </div>
+    <span class="internal-badge">社内向け</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- このツールについて -->
+  <section style="margin-top:30px;">
+    <h2>このツールについて</h2>
+    <div class="about-box dbox">
+      <p>稟議書を作成するためのWebツールです。件名・区分・目的・本文を入力して稟議書を作り、担当・確認・決裁の印を押して、回覧の記録を残します。</p>
+      <ul>
+        <li><b>形式</b>：稟議書は、表面が日本語・裏面が英文で、各1頁です。画面の「英文に切り替え／日本語に切り替え」ボタンで表示を切り替えて、両面を確認できます。</li>
+        <li><b>担当欄の印</b>：担当欄には、東の認印がはじめから押印済みで表示されます。</li>
+        <li><b>データの保存場所</b>：入力した内容は、開いているブラウザの中に保存されます。別のブラウザや別の端末では表示されません。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 画面の見方 -->
+  <section>
+    <h2>画面の見方</h2>
+    <div class="about-box dbox">
+      <h3>3つの役割（印）</h3>
+      <p>画面の上部に、役割ごとのボタンがあります。自分の役割を選んで操作します。印は3つです。</p>
+      <table class="kv">
+        <tr><th>担当者（東）</th><td>稟議書を作成し、提出する役割です。</td></tr>
+        <tr><th>確認（ティリーニ）</th><td>提出された稟議書の内容を確認する役割です。</td></tr>
+        <tr><th>決裁（マンジュラ社長）</th><td>最終的に決裁する役割です。</td></tr>
+      </table>
+      <h3>3つの区分</h3>
+      <p>稟議書は、状態によって次の3つに分かれて表示されます。</p>
+      <table class="kv">
+        <tr><th>稟議書待ち</th><td>提出されて、確認・決裁を待っている稟議書です。</td></tr>
+        <tr><th>差し戻し・下書き</th><td>下書きのままの稟議書と、差し戻された稟議書です。</td></tr>
+        <tr><th>過去稟議書（確定）</th><td>決裁が済んで、確定した稟議書です。</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 操作の流れ -->
+  <section>
+    <h2>操作の流れ</h2>
+    <div class="about-box">
+      <ol class="steps">
+        <li><b>まず会社名を選ぶ</b>（担当：東）
+          <span class="sub-note">会社名の検索欄に「日本エコソーラー」と入力し、候補の「日本エコソーラー（SC1-6）」を選ぶと、定型文（件名・区分・目的・本文）が自動で入ります。稟議書は、ここから書き始めます。</span></li>
+        <li><b>下書きを作る</b>（担当：東）
+          <span class="sub-note">自動で入った定型文をもとに、件名・区分・目的・当日の接触メモ・本文（提案・報告事項）を整えます。</span></li>
+        <li><b>提出する</b>（担当：東）
+          <span class="sub-note">内容が整ったら「押印する」で印を押し、「提出」します。提出した稟議書は「稟議書待ち」に入ります。</span></li>
+        <li><b>確認する</b>（ティリーニ）
+          <span class="sub-note">内容を確認し、確認の印を押します。</span></li>
+        <li><b>決裁する</b>（マンジュラ社長）
+          <span class="sub-note">社長が決裁の印を押すと確定し、「過去稟議書（確定）」に移ります。</span></li>
+      </ol>
+      <p style="font-size:14px;"><b>差し戻されたら</b>：確認・決裁の担当は、理由を書いて差し戻すことができます。差し戻された稟議書は「差し戻し・下書き」に戻るので、理由を見て内容を直し、もう一度提出してください。</p>
+    </div>
+  </section>
+
+  <!-- 便利な操作 -->
+  <section>
+    <h2>便利な操作</h2>
+    <div class="about-box dbox">
+      <table class="kv">
+        <tr><th>言語切替</th><td>「英文に切り替え／日本語に切り替え」で、表面（日本語）と裏面（英文）の表示を切り替えます。</td></tr>
+        <tr><th>印刷／PDFにする</th><td>稟議書を印刷したり、PDFで保存したりします。回覧用のPDFは、ここから作ります。</td></tr>
+        <tr><th>本文をコピー</th><td>稟議書の本文をテキストでコピーします。メールに貼るときなどに使います。</td></tr>
+        <tr><th>条件を加筆する</th><td>条件・特記を本文に加筆します。差し戻しや却下の理由も、ここに記載します。</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 大事なルール -->
+  <section>
+    <h2>大事なルール</h2>
+    <div class="about-box dbox">
+      <ul>
+        <li><b>回覧の実体はメール＋PDFです</b>：このツール上での提出・押印は「記録」であり、それ自体は送信ではありません。実際の回覧は、ツールで作ったPDFをメールに添付して行います。</li>
+        <li><b>印は記録（ログ）として残ります</b>：提出前は、印を置くこと・取り消すことができます。提出後の印は消えません。</li>
+        <li><b>確認と差し戻しは排他です</b>：確認と差し戻しを、同時にはできません。どちらか一方だけを行います。差し戻すときは、理由を書いてください。</li>
+        <li><b>社長の差し戻しに印はありません</b>：社長は、決裁するか、差し戻すかのどちらかです。再提出しても、差し戻しの記録は残ります。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ツール本体へのボタン -->
+  <div class="cta-wrap">
+    <a class="cta-btn" href="ringi-bokuyou.html">稟議書ツールを開く →</a>
+  </div>
+
+  <div class="back-wrap">
+    <a class="back-link" href="portal.html">← 社内ポータルへ戻る</a>
+  </div>
+
+</main>
+
+<footer>
+  <div class="f-inner">
+    <img class="null-walk" src="assets/null-walk.png" alt="">
+    <a class="f-back" href="portal.html">← 社内ポータルへ戻る</a><br>
+    本ページは株式会社ネスコインベストメントの社内向け資料です。社外への共有はご遠慮ください。<br>
+    作成：2026年11月22日　作成者：東 久順（営業サポート）
+  </div>
+</footer>
+
+<div style="text-align:center;font-size:11px;color:#8a94a6;padding:14px 8px 18px;letter-spacing:.05em;">関係者限り ― 本ポータルの印刷コピーは管理対象外です</div>
+</body>
+</html>
